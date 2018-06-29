@@ -7,7 +7,7 @@
     "private": true,
     "description": "Website and 0x portal dapp",
     "scripts": {
-        "build": "NODE_ENV=production webpack; exit 0;",
+        "build": "cross-env NODE_ENV=production webpack || exit 0",
         "clean": "shx rm -f public/bundle*",
         "lint": "tslint --project . 'ts/**/*.ts' 'ts/**/*.tsx'",
         "watch": "webpack-dev-server --content-base public --https",
@@ -73,6 +73,7 @@
         "awesome-typescript-loader": "3.5.0",
         "copy-webpack-plugin": "4.5.1",
         "copyfiles": "1.2.0",
+        "cross-env": "^5.2.0",
         "css-loader": "0.23.x",
         "exports-loader": "0.6.x",
         "imports-loader": "0.6.x",
