@@ -17,18 +17,18 @@
         "run:publish:dry": "run-s install:all build:monorepo_scripts script:prepublish_checks rebuild script:publish:dry",
         "script:prepublish_checks": "node ./packages/monorepo-scripts/lib/prepublish_checks.js",
         "script:publish": "node ./packages/monorepo-scripts/lib/publish.js",
-        "script:publish:dry": "IS_DRY_RUN=true yarn script:publish",
+        "script:publish:dry": "cross-env IS_DRY_RUN=true yarn script:publish",
         "install:all": "yarn install",
         "wsrun": "wsrun",
         "lerna:run": "lerna run",
-        "watch": "wsrun watch $PKG --fast-exit -r --stages --done-criteria='complete|successfully'",
-        "build": "wsrun build $PKG --fast-exit -r --stages",
-        "build:monorepo_scripts": "PKG=@0xproject/monorepo-scripts yarn build",
-        "clean": "wsrun clean $PKG --fast-exit -r --parallel",
+        "watch": "cross-env-shell wsrun watch $PKG --fast-exit -r --stages --done-criteria='complete|successfully'",
+        "build": "cross-env-shell wsrun build $PKG --fast-exit -r --stages",
+        "build:monorepo_scripts": "cross-env PKG=@0xproject/monorepo-scripts yarn build",
+        "clean": "cross-env-shell wsrun clean $PKG --fast-exit -r --parallel",
         "rebuild": "run-s clean build",
-        "test": "wsrun test $PKG --serial --exclude-missing",
-        "stage_docs": "wsrun docs:stage $PKG --parallel --exclude-missing",
-        "lint": "wsrun lint $PKG --parallel --exclude-missing"
+        "test": "cross-env-shell wsrun test $PKG --serial --exclude-missing",
+        "stage_docs": "cross-env-shell wsrun docs:stage $PKG --parallel --exclude-missing",
+        "lint": "cross-env-shell wsrun lint $PKG --parallel --exclude-missing"
     },
     "config": {
         "mnemonic": "concert load couple harbor equip island argue ramp clarify fence smart topic"
@@ -36,6 +36,7 @@
     "devDependencies": {
         "async-child-process": "1.1.1",
         "coveralls": "^3.0.0",
+        "cross-env": "5.2.0",
         "ganache-cli": "^6.1.0",
         "lcov-result-merger": "^2.0.0",
         "lerna": "^2.5.1",
